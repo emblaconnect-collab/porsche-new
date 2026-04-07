@@ -17,15 +17,18 @@ export default function StatsSection() {
 
   return (
     <section className="relative py-40 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <img
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPlS1UxhRJg3OwO6a1gNGiuKH19iqi0EBopXITPkzzwgS8wDvFUfBvCe-l_ROAPDk18OtJM3NhUTO9VK1olWc1Edal8Xsrdz64TQsqSB_IfdVzRkVuqV-xs2Yet0igJ78Z7CKFeLrUAwSrphfhcFtV86SzTZcXab1ZNiK26IUPlGA9WtcWmUuQ88P-8_TvcoFa6UdRy0hHQ-os0KlQ7BogkgGRXKHEmgB4wDqQobqnyR_n_c_mFuetZp1bpxeYPaeYzb00UvugAuNP"
-          alt="Porsche on track"
-          className="w-full h-full object-cover"
-          style={{ filter: "brightness(0.25) blur(1px)" }}
+      {/* Background — vídeo (adicione em /videos/stats-bg.mp4) */}
+      <div className="absolute inset-0 bg-[#080808]">
+        <video
+          className="w-full h-full object-cover opacity-40"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          src="/videos/stats-bg.mp4"
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(8,8,8,0.4) 0%, rgba(8,8,8,0.2) 50%, rgba(8,8,8,0.6) 100%)" }} />
       </div>
 
       <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
