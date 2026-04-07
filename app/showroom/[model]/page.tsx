@@ -68,13 +68,14 @@ function VideoScrub({ slug, name }: { slug: string; name: string }) {
       <div className="sticky top-0 w-full h-screen overflow-hidden">
         <video
           ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-x-0 top-0 w-full object-cover"
           autoPlay
           muted
           playsInline
           preload="auto"
           src={videoSrc}
           onCanPlay={(e) => { (e.target as HTMLVideoElement).pause(); }}
+          style={{ height: "112%", objectPosition: "center top" }}
         />
         <div className="absolute inset-0 pointer-events-none" style={{
           background: "linear-gradient(to bottom, rgba(6,6,6,0.3) 0%, transparent 20%, transparent 70%, rgba(6,6,6,0.8) 100%)"

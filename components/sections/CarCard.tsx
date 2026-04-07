@@ -84,6 +84,7 @@ export default function CarCard({ car, className = "" }: CarCardProps) {
               loop
               preload="metadata"
               src={isMobile && car.mobileVideo ? car.mobileVideo : car.video}
+              style={{ height: "112%", objectPosition: "center top" }}
             />
           )}
 
