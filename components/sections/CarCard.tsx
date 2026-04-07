@@ -64,7 +64,7 @@ export default function CarCard({ car, className = "" }: CarCardProps) {
       }}
     >
       <Link href={`/showroom/${car.slug}`}>
-        <SpotlightCard className="relative overflow-hidden bg-[#060606] cursor-pointer aspect-[4/5]">
+        <SpotlightCard className="relative overflow-hidden bg-[#060606] cursor-pointer aspect-[9/16] md:aspect-[4/5]">
 
           {/* Imagem — sempre visível, some no hover se tiver vídeo */}
           <img
