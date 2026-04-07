@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { SpotlightCard } from "@/components/aceternity/spotlight";
@@ -14,6 +14,11 @@ interface CarCardProps {
 export default function CarCard({ car, className = "" }: CarCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+  }, []);
 
   const playVideo = useCallback(() => {
     const v = videoRef.current;
@@ -31,8 +36,6 @@ export default function CarCard({ car, className = "" }: CarCardProps) {
 
   useEffect(() => {
     if (!car.video || !containerRef.current) return;
-
-    const isMobile = window.innerWidth < 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (!isMobile) return;
 
     // Mobile: play quando o card entra na viewport, pausa quando sai
@@ -48,20 +51,14 @@ export default function CarCard({ car, className = "" }: CarCardProps) {
 
     observer.observe(containerRef.current);
     return () => observer.disconnect();
-  }, [car.video, playVideo, pauseVideo]);
+  }, [car.video, isMobile, playVideo, pauseVideo]);
 
   return (
     <div
       ref={containerRef}
       className={`group ${className}`}
-      onMouseEnter={() => {
-        const isMobile = window.innerWidth < 768;
-        if (!isMobile) playVideo();
-      }}
-      onMouseLeave={() => {
-        const isMobile = window.innerWidth < 768;
-        if (!isMobile) pauseVideo();
-      }}
+      onMouseEnter={() => { if (!isMobile) playVideo(); }}
+      onMouseLeave={() => { if (!isMobile) pauseVideo(); }}
     >
       <Link href={`/showroom/${car.slug}`}>
         <SpotlightCard className="relative overflow-hidden bg-[#060606] cursor-pointer aspect-[9/16] md:aspect-[4/5]">
@@ -86,7 +83,7 @@ export default function CarCard({ car, className = "" }: CarCardProps) {
               playsInline
               loop
               preload="metadata"
-              src={car.video}
+              src={isMobile && car.mobileVideo ? car.mobileVideo : car.video}
             />
           )}
 

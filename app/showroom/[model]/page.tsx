@@ -13,6 +13,12 @@ function VideoScrub({ slug, name }: { slug: string; name: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
+  const [videoSrc, setVideoSrc] = useState(`/videos/${slug}-scrub.mp4`);
+
+  useEffect(() => {
+    const mobile = window.innerWidth < 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (mobile) setVideoSrc(`/videos/${slug}-mobile-scrub.mp4`);
+  }, [slug]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -67,7 +73,7 @@ function VideoScrub({ slug, name }: { slug: string; name: string }) {
           muted
           playsInline
           preload="auto"
-          src={`/videos/${slug}-scrub.mp4`}
+          src={videoSrc}
           onCanPlay={(e) => { (e.target as HTMLVideoElement).pause(); }}
         />
         <div className="absolute inset-0 pointer-events-none" style={{
