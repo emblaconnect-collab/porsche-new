@@ -39,19 +39,20 @@ function HeroContent({ progressBarRef }: { progressBarRef?: React.RefObject<HTML
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] }}
-          className="font-display italic font-normal text-white mb-6 leading-[1.05]"
-          style={{ fontSize: "clamp(2.5rem, 8vw, 7.5rem)", letterSpacing: "-0.03em" }}
+          className="font-display italic font-normal mb-6 leading-[1.05]"
+          style={{ fontSize: "clamp(2.5rem, 8vw, 7.5rem)", letterSpacing: "-0.03em", color: "#111111" }}
         >
           Não Existe
           <br />
-          <span style={{ color: "#e8d5a3" }}>Substituto.</span>
+          <span style={{ color: "#c9a84c" }}>Substituto.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.7 }}
-          className="text-white/50 text-sm md:text-base tracking-wide max-w-md mx-auto mb-10 leading-relaxed"
+          className="text-sm md:text-base tracking-wide max-w-md mx-auto mb-10 leading-relaxed"
+          style={{ color: "#444444" }}
         >
           Cada curva engenheirada. Cada momento amplificado. Cada volta, inesquecível.
         </motion.p>

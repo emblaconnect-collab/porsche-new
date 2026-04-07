@@ -70,7 +70,8 @@ export default function Navbar() {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="px-6 py-2 bg-[#d5001c] text-white text-xs tracking-widest uppercase font-bold hover:bg-[#b00017] transition-colors"
+              className="px-6 py-2 text-black text-xs tracking-widest uppercase font-bold transition-colors"
+              style={{ background: "linear-gradient(135deg, #c9a84c 0%, #e8d5a3 50%, #c9a84c 100%)" }}
             >
               Configurar
             </motion.button>

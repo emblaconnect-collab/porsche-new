@@ -34,7 +34,7 @@ export default function CTASection() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link href="/showroom">
               <div className="relative overflow-hidden">
-                <BorderBeam size={80} duration={8} colorFrom="#d5001c" colorTo="#ffffff" />
+                <BorderBeam size={80} duration={8} colorFrom="#c9a84c" colorTo="#e8d5a3" />
                 <MovingBorderButton
                   duration={3000}
                   className="px-12 py-4 text-xs font-bold tracking-[0.25em] uppercase"
