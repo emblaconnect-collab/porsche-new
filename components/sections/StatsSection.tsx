@@ -5,10 +5,10 @@ import { useInView, motion } from "framer-motion";
 import { NumberTicker } from "@/components/magicui/number-ticker";
 
 const stats = [
-  { label: "Acceleration", value: 2.7, suffix: "s", sub: "0 – 100 km/h", decimals: 1 },
-  { label: "Top Speed", value: 330, suffix: "", sub: "km/h Maximum" },
-  { label: "Core Models", value: 6, suffix: "+", sub: "Iconic Lineups" },
-  { label: "Years of Legacy", value: 75, suffix: "+", sub: "Since 1948" },
+  { label: "Aceleração", value: 2.7, suffix: "s", sub: "0 – 100 km/h", decimals: 1 },
+  { label: "Vel. Máxima", value: 330, suffix: "", sub: "km/h Máximo" },
+  { label: "Modelos", value: 6, suffix: "+", sub: "Linhas Icônicas" },
+  { label: "Anos de Legado", value: 75, suffix: "+", sub: "Desde 1948" },
 ];
 
 export default function StatsSection() {
@@ -35,7 +35,7 @@ export default function StatsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <span className="text-[10px] tracking-[0.5em] text-[#d5001c] uppercase font-bold">Pure Performance</span>
+          <span className="text-[10px] tracking-[0.5em] text-[#d5001c] uppercase font-bold">Performance Pura</span>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-0">

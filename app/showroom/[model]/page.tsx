@@ -32,25 +32,25 @@ export default function ModelPage({ params }: { params: Promise<{ model: string 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           {/* Description + CTA */}
           <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-            <h2 className="font-display text-3xl italic text-white mb-6">The Experience</h2>
+            <h2 className="font-display text-3xl italic text-white mb-6">A Experiência</h2>
             <p className="text-white/50 text-sm leading-relaxed tracking-wide mb-8">{car.description}</p>
             <p className="text-white/30 text-xs tracking-widest uppercase mb-12">{car.price}</p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href={`/configure/${car.slug}`}>
                 <ShimmerButton background="#d5001c" className="px-8 py-4 text-xs font-bold tracking-widest uppercase w-full sm:w-auto">
-                  Configure This Model
+                  Configurar Este Modelo
                 </ShimmerButton>
               </Link>
               <Link href="/contact">
                 <button className="px-8 py-4 border border-white/15 text-white text-xs font-bold tracking-widest uppercase hover:bg-white/5 transition-all w-full sm:w-auto">
-                  Request a Test Drive
+                  Solicitar Test Drive
                 </button>
               </Link>
             </div>
 
             {/* Color swatches */}
             <div className="mt-12">
-              <p className="text-[10px] tracking-[0.3em] uppercase text-white/30 mb-4">Available Colors</p>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-white/30 mb-4">Cores Disponíveis</p>
               <div className="flex gap-3">
                 {car.colors.map((color, i) => (
                   <motion.button
@@ -67,7 +67,7 @@ export default function ModelPage({ params }: { params: Promise<{ model: string 
 
           {/* Specs */}
           <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.15 }}>
-            <h2 className="font-display text-3xl italic text-white mb-8">Specifications</h2>
+            <h2 className="font-display text-3xl italic text-white mb-8">Especificações</h2>
             <div className="space-y-0 border-t border-white/5">
               {car.specs.map((spec, i) => (
                 <motion.div

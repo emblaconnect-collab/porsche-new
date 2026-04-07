@@ -19,16 +19,16 @@ export default function CTASection() {
           transition={{ duration: 0.8 }}
         >
           <span className="text-[10px] tracking-[0.5em] text-[#d5001c] uppercase font-bold block mb-6">
-            Begin Your Journey
+            Comece Sua Jornada
           </span>
           <h2
             className="font-display italic text-white mb-8 leading-tight"
             style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
           >
-            Build Your Perfect Porsche.
+            Monte Seu Porsche Perfeito.
           </h2>
           <p className="text-white/40 text-sm tracking-wide max-w-lg mx-auto mb-12 leading-relaxed">
-            Choose your model, select your options, and configure the Porsche that reflects your vision of perfection.
+            Escolha o modelo, selecione os opcionais e configure o Porsche que reflete sua visão de perfeição.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -40,7 +40,7 @@ export default function CTASection() {
                   className="px-12 py-4 text-xs font-bold tracking-[0.25em] uppercase"
                   borderClassName=""
                 >
-                  <span className="px-2 py-1 text-white">Explore Showroom</span>
+                  <span className="px-2 py-1 text-white">Ver Showroom</span>
                 </MovingBorderButton>
               </div>
             </Link>
@@ -50,7 +50,7 @@ export default function CTASection() {
                 whileTap={{ scale: 0.98 }}
                 className="px-12 py-4 border border-white/10 text-white text-xs font-bold tracking-[0.25em] uppercase transition-all duration-300"
               >
-                Book a Consultation
+                Agendar Consulta
               </motion.button>
             </Link>
           </div>

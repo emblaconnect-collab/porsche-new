@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 const cols = [
-  { title: "Models", links: [{ label: "911 Turbo S", href: "/showroom/911-turbo-s" }, { label: "Taycan", href: "/showroom/taycan" }, { label: "Cayenne", href: "/showroom/cayenne" }, { label: "718 Cayman", href: "/showroom/718" }] },
-  { title: "Explore", links: [{ label: "Showroom", href: "/showroom" }, { label: "Configure", href: "/configure/911-turbo-s" }, { label: "Experience", href: "/experience" }, { label: "About", href: "/about" }] },
-  { title: "Connect", links: [{ label: "Contact Us", href: "/contact" }, { label: "Dealers", href: "/contact" }, { label: "Test Drive", href: "/experience" }, { label: "Press", href: "/about" }] },
+  { title: "Modelos", links: [{ label: "911 Turbo S", href: "/showroom/911-turbo-s" }, { label: "Taycan", href: "/showroom/taycan" }, { label: "Cayenne", href: "/showroom/cayenne" }, { label: "718 Cayman", href: "/showroom/718" }] },
+  { title: "Explorar", links: [{ label: "Showroom", href: "/showroom" }, { label: "Configurar", href: "/configure/911-turbo-s" }, { label: "Experiências", href: "/experience" }, { label: "Sobre", href: "/about" }] },
+  { title: "Contato", links: [{ label: "Fale Conosco", href: "/contact" }, { label: "Concessionárias", href: "/contact" }, { label: "Test Drive", href: "/experience" }, { label: "Imprensa", href: "/about" }] },
 ];
 
 export default function Footer() {
@@ -14,7 +14,7 @@ export default function Footer() {
           <div>
             <span className="text-2xl font-bold tracking-[0.25em] text-white uppercase block mb-4">PORSCHE</span>
             <p className="text-white/40 text-xs leading-relaxed tracking-wide">
-              There is No Substitute.<br />Engineered for passion since 1948.
+              Não Existe Substituto.<br />Engenharia com paixão desde 1948.
             </p>
           </div>
           {cols.map((col) => (
@@ -33,9 +33,9 @@ export default function Footer() {
           ))}
         </div>
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] tracking-widest text-white/20 uppercase">© 2024 Porsche AG. All rights reserved.</p>
+          <p className="text-[10px] tracking-widest text-white/20 uppercase">© 2024 Porsche AG. Todos os direitos reservados.</p>
           <div className="flex gap-8">
-            {["Legal", "Privacy", "Cookies"].map((l) => (
+            {["Legal", "Privacidade", "Cookies"].map((l) => (
               <Link key={l} href="#" className="text-[10px] tracking-widest uppercase text-white/20 hover:text-white/50 transition-colors">
                 {l}
               </Link>

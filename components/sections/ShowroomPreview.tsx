@@ -32,11 +32,11 @@ export default function ShowroomPreview() {
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
         >
           <div>
-            <span className="text-[10px] tracking-[0.4em] text-[#d5001c] uppercase font-bold block mb-3">The Collection</span>
-            <h2 className="font-display text-4xl md:text-5xl italic text-white">The Showroom</h2>
+            <span className="text-[10px] tracking-[0.4em] text-[#d5001c] uppercase font-bold block mb-3">A Coleção</span>
+            <h2 className="font-display text-4xl md:text-5xl italic text-white">O Showroom</h2>
           </div>
           <Link href="/showroom" className="text-xs tracking-widest uppercase text-white/50 hover:text-white transition-colors flex items-center gap-2 group">
-            View All Models
+            Ver Todos os Modelos
             <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
           </Link>
         </motion.div>
@@ -78,7 +78,7 @@ export default function ShowroomPreview() {
                       initial={{ opacity: 0, y: 8 }}
                       className="opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-[10px] font-bold tracking-widest uppercase text-white/80 flex items-center gap-2"
                     >
-                      Discover More →
+                      Descobrir Mais →
                     </motion.span>
                   </div>
                 </SpotlightCard>

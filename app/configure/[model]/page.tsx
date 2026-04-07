@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 import { getCarBySlug } from "@/lib/cars";
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
 
-const interiorOptions = ["Black Leather", "Cognac Leather", "Chalk Leather", "Bordeaux Red"];
+const interiorOptions = ["Couro Preto", "Couro Cognac", "Couro Chalk", "Vermelho Bordeaux"];
 const wheelOptions = ["20\" Carrera S", "21\" Turbo", "21\" Sport Classic", "22\" RS Spyder Design"];
-const packageOptions = ["Sport Chrono", "PASM Sport Suspension", "Rear-Axle Steering", "Night Vision Assist"];
+const packageOptions = ["Sport Chrono", "Suspensão PASM Sport", "Direção no Eixo Traseiro", "Night Vision Assist"];
 
 export default function ConfigurePage({ params }: { params: Promise<{ model: string }> }) {
   const { model } = use(params);
@@ -27,8 +27,8 @@ export default function ConfigurePage({ params }: { params: Promise<{ model: str
     <div className="min-h-screen bg-[#060606] pt-28 pb-20 px-6 md:px-12">
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="mb-16">
-          <span className="text-[10px] tracking-[0.5em] text-[#d5001c] uppercase font-bold block mb-3">Configurator</span>
-          <h1 className="font-display text-4xl md:text-6xl italic text-white">Build Your {car.name}</h1>
+          <span className="text-[10px] tracking-[0.5em] text-[#d5001c] uppercase font-bold block mb-3">Configurador</span>
+          <h1 className="font-display text-4xl md:text-6xl italic text-white">Monte Seu {car.name}</h1>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -44,14 +44,14 @@ export default function ConfigurePage({ params }: { params: Promise<{ model: str
               <div className="absolute bottom-4 right-4 w-6 h-6 border border-white/30" style={{ background: car.colors[selectedColor] }} />
             </div>
             <div className="bg-[#0f0f0f] border border-white/5 p-6">
-              <h3 className="text-xs tracking-widest uppercase text-white/30 mb-4 font-bold">Your Configuration</h3>
+              <h3 className="text-xs tracking-widest uppercase text-white/30 mb-4 font-bold">Sua Configuração</h3>
               <div className="space-y-2 text-xs text-white/60">
-                <div className="flex justify-between"><span>Model</span><span className="text-white">{car.name}</span></div>
-                <div className="flex justify-between"><span>Exterior</span><span className="text-white">Color #{selectedColor + 1}</span></div>
+                <div className="flex justify-between"><span>Modelo</span><span className="text-white">{car.name}</span></div>
+                <div className="flex justify-between"><span>Exterior</span><span className="text-white">Cor #{selectedColor + 1}</span></div>
                 <div className="flex justify-between"><span>Interior</span><span className="text-white">{interiorOptions[selectedInterior]}</span></div>
-                <div className="flex justify-between"><span>Wheels</span><span className="text-white">{wheelOptions[selectedWheels]}</span></div>
+                <div className="flex justify-between"><span>Rodas</span><span className="text-white">{wheelOptions[selectedWheels]}</span></div>
                 <div className="flex justify-between pt-4 border-t border-white/5 text-white font-bold">
-                  <span>Base Price</span><span>{car.price}</span>
+                  <span>Preço Base</span><span>{car.price}</span>
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@ export default function ConfigurePage({ params }: { params: Promise<{ model: str
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }} className="space-y-12">
             {/* Color */}
             <div>
-              <h3 className="text-[10px] tracking-[0.4em] uppercase text-white/30 font-bold mb-5">Exterior Color</h3>
+              <h3 className="text-[10px] tracking-[0.4em] uppercase text-white/30 font-bold mb-5">Cor Exterior</h3>
               <div className="flex gap-3">
                 {car.colors.map((color, i) => (
                   <motion.button
@@ -79,6 +79,7 @@ export default function ConfigurePage({ params }: { params: Promise<{ model: str
             {/* Interior */}
             <div>
               <h3 className="text-[10px] tracking-[0.4em] uppercase text-white/30 font-bold mb-5">Interior</h3>
+
               <div className="grid grid-cols-2 gap-2">
                 {interiorOptions.map((opt, i) => (
                   <button
@@ -94,7 +95,7 @@ export default function ConfigurePage({ params }: { params: Promise<{ model: str
 
             {/* Wheels */}
             <div>
-              <h3 className="text-[10px] tracking-[0.4em] uppercase text-white/30 font-bold mb-5">Wheels</h3>
+              <h3 className="text-[10px] tracking-[0.4em] uppercase text-white/30 font-bold mb-5">Rodas</h3>
               <div className="grid grid-cols-2 gap-2">
                 {wheelOptions.map((opt, i) => (
                   <button
@@ -110,7 +111,7 @@ export default function ConfigurePage({ params }: { params: Promise<{ model: str
 
             {/* Packages */}
             <div>
-              <h3 className="text-[10px] tracking-[0.4em] uppercase text-white/30 font-bold mb-5">Performance Packages</h3>
+              <h3 className="text-[10px] tracking-[0.4em] uppercase text-white/30 font-bold mb-5">Pacotes de Performance</h3>
               <div className="space-y-2">
                 {packageOptions.map((opt, i) => (
                   <button
@@ -126,7 +127,7 @@ export default function ConfigurePage({ params }: { params: Promise<{ model: str
             </div>
 
             <ShimmerButton background="#d5001c" className="w-full py-4 text-xs font-bold tracking-widest uppercase">
-              Request This Configuration
+              Solicitar Esta Configuração
             </ShimmerButton>
           </motion.div>
         </div>

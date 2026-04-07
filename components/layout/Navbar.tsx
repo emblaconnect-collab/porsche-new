@@ -8,9 +8,9 @@ import { cn } from "@/lib/utils";
 
 const links = [
   { label: "Showroom", href: "/showroom" },
-  { label: "About", href: "/about" },
-  { label: "Experience", href: "/experience" },
-  { label: "Contact", href: "/contact" },
+  { label: "Sobre", href: "/about" },
+  { label: "Experiências", href: "/experience" },
+  { label: "Contato", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -72,7 +72,7 @@ export default function Navbar() {
               whileTap={{ scale: 0.98 }}
               className="px-6 py-2 bg-[#d5001c] text-white text-xs tracking-widest uppercase font-bold hover:bg-[#b00017] transition-colors"
             >
-              Configure
+              Configurar
             </motion.button>
           </Link>
         </div>
@@ -112,7 +112,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="font-display text-4xl italic text-white hover:text-[#d5001c] transition-colors"
+                    className="font-display text-4xl italic text-white hover:text-[#c9a84c] transition-colors"
                   >
                     {link.label}
                   </Link>

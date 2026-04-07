@@ -6,14 +6,15 @@ import Link from "next/link";
 import { cars } from "@/lib/cars";
 import { SpotlightCard } from "@/components/aceternity/spotlight";
 
-const categories = ["All", "Sports Car", "Electric", "SUV", "Sports Sedan", "Compact SUV"];
+const categories = ["Todos", "Sports Car", "Elétrico", "SUV", "Sedan Esportivo", "SUV Compacto"];
 
 export default function ShowroomPage() {
   const [active, setActive] = useState("All");
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
 
-  const filtered = active === "All" ? cars : cars.filter((c) => c.category === active);
+  const categoryMap: Record<string, string> = { "Elétrico": "Electric", "Sedan Esportivo": "Sports Sedan", "SUV Compacto": "Compact SUV" };
+  const filtered = active === "Todos" ? cars : cars.filter((c) => c.category === (categoryMap[active] ?? active));
 
   return (
     <div className="min-h-screen bg-[#060606] pt-28 pb-20 px-6 md:px-12">
@@ -25,10 +26,10 @@ export default function ShowroomPage() {
           transition={{ duration: 0.7 }}
           className="mb-16"
         >
-          <span className="text-[10px] tracking-[0.5em] text-[#d5001c] uppercase font-bold block mb-4">All Models</span>
-          <h1 className="font-display text-5xl md:text-7xl italic text-white mb-6">The Showroom</h1>
+          <span className="text-[10px] tracking-[0.5em] text-[#d5001c] uppercase font-bold block mb-4">Todos os Modelos</span>
+          <h1 className="font-display text-5xl md:text-7xl italic text-white mb-6">O Showroom</h1>
           <p className="text-white/40 max-w-xl text-sm leading-relaxed tracking-wide">
-            From iconic sports cars to electric pioneers. Every Porsche is engineered to deliver the ultimate driving experience.
+            De esportivos icônicos a pioneiros elétricos. Cada Porsche é projetado para entregar a experiência definitiva de dirigir.
           </p>
         </motion.div>
 
@@ -85,7 +86,7 @@ export default function ShowroomPage() {
                       ))}
                     </div>
                     <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[10px] font-bold tracking-widest uppercase text-white/70">
-                      Discover →
+                      Descobrir →
                     </span>
                   </div>
                 </SpotlightCard>

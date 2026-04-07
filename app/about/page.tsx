@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 
 const milestones = [
-  { year: "1948", event: "Ferry Porsche builds the 356 — the first car to bear the Porsche name." },
-  { year: "1963", event: "The 911 is unveiled at the Frankfurt Motor Show. An icon is born." },
-  { year: "1972", event: "Porsche AG is founded as an independent company in Stuttgart." },
-  { year: "1984", event: "The 959 introduces all-wheel drive and redefines what a supercar can be." },
-  { year: "2003", event: "The Cayenne launches — Porsche's first SUV, a commercial breakthrough." },
-  { year: "2019", event: "The Taycan arrives. Porsche enters the electric era without compromise." },
+  { year: "1948", event: "Ferry Porsche constrói o 356 — o primeiro carro a levar o nome Porsche." },
+  { year: "1963", event: "O 911 é apresentado no Salão de Frankfurt. Um ícone nasce." },
+  { year: "1972", event: "A Porsche AG é fundada como empresa independente em Stuttgart." },
+  { year: "1984", event: "O 959 introduz a tração nas quatro rodas e redefine o conceito de superesportivo." },
+  { year: "2003", event: "O Cayenne chega — primeiro SUV da Porsche, um marco comercial." },
+  { year: "2019", event: "O Taycan estreia. A Porsche entra na era elétrica sem abrir mão da performance." },
 ];
 
 export default function AboutPage() {
@@ -24,9 +24,9 @@ export default function AboutPage() {
         <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 40%, #060606 100%)" }} />
         <div className="absolute bottom-0 left-0 right-0 px-6 md:px-12 pb-12">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <span className="text-[10px] tracking-[0.5em] text-[#d5001c] uppercase font-bold block mb-4">Our Story</span>
+            <span className="text-[10px] tracking-[0.5em] text-[#d5001c] uppercase font-bold block mb-4">Nossa História</span>
             <h1 className="font-display text-5xl md:text-7xl italic text-white" style={{ letterSpacing: "-0.02em" }}>
-              Driven by Dreams<br />Since 1948.
+              Movidos por Sonhos<br />Desde 1948.
             </h1>
           </motion.div>
         </div>
@@ -42,7 +42,7 @@ export default function AboutPage() {
           className="max-w-3xl mb-32"
         >
           <blockquote className="font-display text-2xl md:text-3xl italic text-white/80 leading-relaxed mb-8 border-l-2 border-[#d5001c] pl-8">
-            "In the beginning, I looked around and could not find quite the car I dreamed of. So I decided to build it myself."
+            "No começo, olhei ao redor e não encontrei o carro que sonhava. Então decidi construí-lo eu mesmo."
           </blockquote>
           <p className="text-white/30 text-sm tracking-widest uppercase">— Ferry Porsche</p>
         </motion.div>
@@ -55,7 +55,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="font-display text-3xl italic text-white mb-16"
           >
-            A Legacy of Innovation
+            Um Legado de Inovação
           </motion.h2>
           <div className="space-y-0 border-t border-white/5">
             {milestones.map((m, i) => (
