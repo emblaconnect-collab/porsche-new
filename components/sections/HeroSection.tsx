@@ -67,10 +67,11 @@ export default function HeroSection() {
     <div ref={heroRef} className="relative h-[300vh]">
       <div className="sticky top-0 w-full h-screen overflow-hidden bg-[#060606]">
 
-        {/* Vídeo */}
+        {/* Vídeo com a correção autoPlay para não dar tela preta no mobile */}
         <video
           ref={videoRef}
           className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
           muted
           playsInline
           preload="auto"
