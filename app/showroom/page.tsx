@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { cars } from "@/lib/cars";
 import { SpotlightCard } from "@/components/aceternity/spotlight";
@@ -11,7 +11,6 @@ const categories = ["Todos", "Sports Car", "Elétrico", "SUV", "Sedan Esportivo"
 export default function ShowroomPage() {
   const [active, setActive] = useState("All");
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
 
   const categoryMap: Record<string, string> = { "Elétrico": "Electric", "Sedan Esportivo": "Sports Sedan", "SUV Compacto": "Compact SUV" };
   const filtered = active === "Todos" ? cars : cars.filter((c) => c.category === (categoryMap[active] ?? active));
@@ -61,7 +60,8 @@ export default function ShowroomPage() {
             <motion.div
               key={car.slug}
               initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
             >
               <Link href={`/showroom/${car.slug}`}>
