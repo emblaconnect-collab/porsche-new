@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { cars } from "@/lib/cars";
-import { SpotlightCard } from "@/components/aceternity/spotlight";
+import CarCard from "@/components/sections/CarCard";
 
 const featured = cars.slice(0, 3);
 
@@ -49,40 +49,7 @@ export default function ShowroomPreview() {
         >
           {featured.map((car) => (
             <motion.div key={car.slug} variants={item}>
-              <Link href={`/showroom/${car.slug}`}>
-                <SpotlightCard className="group relative overflow-hidden bg-[#0a0a0a] cursor-pointer aspect-[4/5]">
-                  <img
-                    src={car.image}
-                    alt={car.name}
-                    className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-
-                  {/* Red line on hover */}
-                  <div className="absolute top-0 left-0 h-0.5 w-0 bg-[#d5001c] group-hover:w-full transition-all duration-500" />
-
-                  <div className="absolute bottom-0 left-0 right-0 p-8">
-                    <span className="text-[9px] tracking-[0.3em] text-[#d5001c] uppercase font-bold block mb-2">
-                      {car.category}
-                    </span>
-                    <h3 className="font-display text-3xl italic text-white mb-3">{car.name}</h3>
-                    <div className="flex gap-4 mb-6">
-                      {car.specs.slice(0, 2).map((s) => (
-                        <div key={s.label} className="first:pl-0 pl-4 first:border-l-0 border-l border-white/15">
-                          <p className="text-[9px] uppercase text-white/40 tracking-wider">{s.label}</p>
-                          <p className="text-sm font-medium text-white">{s.value}</p>
-                        </div>
-                      ))}
-                    </div>
-                    <motion.span
-                      initial={{ opacity: 0, y: 8 }}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-[10px] font-bold tracking-widest uppercase text-white/80 flex items-center gap-2"
-                    >
-                      Descobrir Mais →
-                    </motion.span>
-                  </div>
-                </SpotlightCard>
-              </Link>
+              <CarCard car={car} />
             </motion.div>
           ))}
         </motion.div>

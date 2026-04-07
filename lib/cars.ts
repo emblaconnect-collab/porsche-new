@@ -6,6 +6,7 @@ export interface Car {
   price: string;
   image: string;
   heroImage: string;
+  video?: string;
   specs: { label: string; value: string }[];
   colors: string[];
   description: string;
@@ -20,6 +21,7 @@ export const cars: Car[] = [
     price: "From $233,400",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCS7XKcxEjjdebtM9H8E8c2yvCM_057X7WpPf5yQNbawz3k_7ZxrIsTiWzvnhj-qrL8UglchQi9sCjRI22O2B_nS4ZR0zljkqp434zg0_6_-2pN6Jlr0IGbWYdGwc7U2jsGmlu2FkfA4NTWBaLh3yOsIBlFj1duL4c9HqqN4OP5SrtdxZBUzM54_Dhv790B9gD4bjIx8T-QYDyZAbLjb2YfplEIR582hdFjGQL67VV57IeSkYxIOj2G4Iaa_SfLS8y8DLWzejRpfWz3",
     heroImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuCS7XKcxEjjdebtM9H8E8c2yvCM_057X7WpPf5yQNbawz3k_7ZxrIsTiWzvnhj-qrL8UglchQi9sCjRI22O2B_nS4ZR0zljkqp434zg0_6_-2pN6Jlr0IGbWYdGwc7U2jsGmlu2FkfA4NTWBaLh3yOsIBlFj1duL4c9HqqN4OP5SrtdxZBUzM54_Dhv790B9gD4bjIx8T-QYDyZAbLjb2YfplEIR582hdFjGQL67VV57IeSkYxIOj2G4Iaa_SfLS8y8DLWzejRpfWz3",
+    video: "/videos/911-turbo-s.mp4",
     specs: [
       { label: "Engine", value: "3.8L Twin-Turbo Flat-6" },
       { label: "Power", value: "640 hp" },

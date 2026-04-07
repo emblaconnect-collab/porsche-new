@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { cars } from "@/lib/cars";
-import { SpotlightCard } from "@/components/aceternity/spotlight";
+import CarCard from "@/components/sections/CarCard";
 
 const categories = ["Todos", "Sports Car", "Elétrico", "SUV", "Sedan Esportivo", "SUV Compacto"];
 
@@ -63,33 +63,7 @@ export default function ShowroomPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.07 }}
             >
-              <Link href={`/showroom/${car.slug}`}>
-                <SpotlightCard className="group relative overflow-hidden bg-[#060606] cursor-pointer aspect-[4/5]">
-                  <img
-                    src={car.image}
-                    alt={car.name}
-                    className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-                  <div className="absolute top-0 left-0 h-0.5 w-0 bg-[#d5001c] group-hover:w-full transition-all duration-500" />
-                  <div className="absolute bottom-0 left-0 right-0 p-8">
-                    <span className="text-[9px] tracking-[0.3em] text-[#d5001c] uppercase font-bold block mb-2">{car.category}</span>
-                    <h3 className="font-display text-3xl italic text-white mb-1">{car.name}</h3>
-                    <p className="text-white/40 text-xs mb-4 tracking-wide">{car.price}</p>
-                    <div className="flex gap-4 mb-4">
-                      {car.specs.slice(0, 2).map((s) => (
-                        <div key={s.label} className="first:pl-0 pl-4 first:border-l-0 border-l border-white/10">
-                          <p className="text-[9px] uppercase text-white/30 tracking-wider">{s.label}</p>
-                          <p className="text-sm font-medium text-white">{s.value}</p>
-                        </div>
-                      ))}
-                    </div>
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[10px] font-bold tracking-widest uppercase text-white/70">
-                      Descobrir →
-                    </span>
-                  </div>
-                </SpotlightCard>
-              </Link>
+              <CarCard car={car} />
             </motion.div>
           ))}
         </div>
