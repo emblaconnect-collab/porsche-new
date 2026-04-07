@@ -9,7 +9,7 @@ import { SpotlightCard } from "@/components/aceternity/spotlight";
 const categories = ["Todos", "Sports Car", "Elétrico", "SUV", "Sedan Esportivo", "SUV Compacto"];
 
 export default function ShowroomPage() {
-  const [active, setActive] = useState("All");
+  const [active, setActive] = useState("Todos");
   const ref = useRef(null);
 
   const categoryMap: Record<string, string> = { "Elétrico": "Electric", "Sedan Esportivo": "Sports Sedan", "SUV Compacto": "Compact SUV" };
@@ -59,10 +59,9 @@ export default function ShowroomPage() {
           {filtered.map((car, i) => (
             <motion.div
               key={car.slug}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.07 }}
             >
               <Link href={`/showroom/${car.slug}`}>
                 <SpotlightCard className="group relative overflow-hidden bg-[#060606] cursor-pointer aspect-[4/5]">

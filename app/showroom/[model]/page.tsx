@@ -1,21 +1,132 @@
 "use client";
 
-import { use } from "react";
+import { use, useEffect, useRef } from "react";
 import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { getCarBySlug } from "@/lib/cars";
-import { ShimmerButton } from "@/components/magicui/shimmer-button";
+
+const SPRING_K = 18;
+const DAMPING = 7;
+
+function VideoScrub({ slug, name }: { slug: string; name: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const section = sectionRef.current;
+    if (!video || !section) return;
+
+    video.pause();
+
+    let targetTime = 0;
+    let displayTime = 0;
+    let velocity = 0;
+    let lastTs = 0;
+    let rafId: number;
+
+    const onScroll = () => {
+      const rect = section.getBoundingClientRect();
+      const total = section.offsetHeight - window.innerHeight;
+      const scrolled = -rect.top;
+      const progress = Math.max(0, Math.min(scrolled / total, 1));
+      if (video.duration) targetTime = progress * video.duration;
+      if (progressRef.current) progressRef.current.style.width = `${progress * 100}%`;
+    };
+
+    const animate = (ts: number) => {
+      if (!lastTs) lastTs = ts;
+      const dt = Math.min((ts - lastTs) / 1000, 0.05);
+      lastTs = ts;
+      const springF = (targetTime - displayTime) * SPRING_K;
+      const dampF = velocity * DAMPING;
+      velocity += (springF - dampF) * dt;
+      displayTime += velocity * dt;
+      displayTime = Math.max(0, video.duration ? Math.min(displayTime, video.duration) : displayTime);
+      if (video.duration && Math.abs(displayTime - video.currentTime) > 0.005) {
+        video.currentTime = displayTime;
+      }
+      rafId = requestAnimationFrame(animate);
+    };
+
+    rafId = requestAnimationFrame(animate);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  return (
+    <div ref={sectionRef} className="relative h-[250vh] bg-[#060606]">
+      <div className="sticky top-0 w-full h-screen overflow-hidden">
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          muted
+          playsInline
+          preload="auto"
+          src={`/videos/${slug}-scrub.mp4`}
+        />
+        <div className="absolute inset-0 pointer-events-none" style={{
+          background: "linear-gradient(to bottom, rgba(6,6,6,0.3) 0%, transparent 20%, transparent 70%, rgba(6,6,6,0.8) 100%)"
+        }} />
+
+        {/* Label */}
+        <div className="absolute top-8 left-8 md:left-12 z-10">
+          <span className="text-[9px] tracking-[0.4em] uppercase font-bold" style={{ color: "rgba(201,168,76,0.7)" }}>
+            {name} · Arraste para explorar
+          </span>
+        </div>
+
+        {/* Barra de progresso */}
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] z-10" style={{ background: "rgba(201,168,76,0.1)" }}>
+          <div ref={progressRef} className="h-full" style={{ width: "0%", background: "#c9a84c", transition: "none" }} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function VideoPlaceholder({ slug, name }: { slug: string; name: string }) {
+  return (
+    <div className="bg-[#111111]">
+      <div
+        className="w-full flex items-center justify-center"
+        style={{ aspectRatio: "16/7", background: "linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)" }}
+      >
+        <div className="text-center">
+          <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center rounded-full"
+            style={{ border: "1px solid rgba(201,168,76,0.3)" }}>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <polygon points="5,3 19,12 5,21" fill="#c9a84c" opacity="0.8" />
+            </svg>
+          </div>
+          <p className="text-[10px] tracking-[0.4em] uppercase font-bold" style={{ color: "rgba(201,168,76,0.5)" }}>
+            Video Scrub · {name}
+          </p>
+          <p className="text-[9px] tracking-widest uppercase mt-2" style={{ color: "rgba(255,255,255,0.2)" }}>
+            Adicione o vídeo em /videos/{slug}-scrub.mp4
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function ModelPage({ params }: { params: Promise<{ model: string }> }) {
   const { model } = use(params);
   const car = getCarBySlug(model);
   if (!car) return notFound();
 
+  const hasVideo = car.slug === "911-turbo-s"; // expanda conforme adicionar vídeos
+
   return (
     <div className="min-h-screen bg-[#f5f4f2]">
 
-      {/* Hero do modelo — imagem full-width */}
+      {/* Hero do modelo */}
       <div className="relative h-[80vh] overflow-hidden bg-[#060606]">
         <img src={car.heroImage} alt={car.name} className="absolute inset-0 w-full h-full object-cover opacity-70" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(6,6,6,0.2) 0%, transparent 40%, rgba(6,6,6,0.85) 100%)" }} />
@@ -28,37 +139,13 @@ export default function ModelPage({ params }: { params: Promise<{ model: string 
         </div>
       </div>
 
-      {/* Placeholder: Video Scrub do carro */}
-      <div className="bg-[#111111]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-8">
-          <span className="text-[9px] tracking-[0.4em] uppercase font-bold block mb-4" style={{ color: "#c9a84c" }}>
-            Em Breve
-          </span>
-        </div>
-        <div
-          className="w-full flex items-center justify-center"
-          style={{ aspectRatio: "16/7", background: "linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)" }}
-        >
-          <div className="text-center">
-            <div
-              className="w-20 h-20 mx-auto mb-6 flex items-center justify-center rounded-full"
-              style={{ border: "1px solid rgba(201,168,76,0.3)" }}
-            >
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                <polygon points="5,3 19,12 5,21" fill="#c9a84c" opacity="0.8" />
-              </svg>
-            </div>
-            <p className="text-[10px] tracking-[0.4em] uppercase font-bold" style={{ color: "rgba(201,168,76,0.5)" }}>
-              Video Scrub · {car.name}
-            </p>
-            <p className="text-[9px] tracking-widest uppercase mt-2" style={{ color: "rgba(255,255,255,0.2)" }}>
-              Adicione o vídeo em /videos/{car.slug}-scrub.mp4
-            </p>
-          </div>
-        </div>
-      </div>
+      {/* Video Scrub ou Placeholder */}
+      {hasVideo
+        ? <VideoScrub slug={car.slug} name={car.name} />
+        : <VideoPlaceholder slug={car.slug} name={car.name} />
+      }
 
-      {/* Especificações — linha horizontal */}
+      {/* Especificações — grid horizontal */}
       <div className="bg-[#111111] border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
           <span className="text-[9px] tracking-[0.4em] uppercase font-bold block mb-10" style={{ color: "#c9a84c" }}>
@@ -87,7 +174,6 @@ export default function ModelPage({ params }: { params: Promise<{ model: string 
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
 
-            {/* Descrição + CTA */}
             <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
               <span className="text-[9px] tracking-[0.4em] uppercase font-bold block mb-6" style={{ color: "#c9a84c" }}>A Experiência</span>
               <h2 className="font-display text-3xl md:text-4xl italic mb-6 leading-tight" style={{ color: "#111111" }}>{car.name}</h2>
@@ -112,7 +198,6 @@ export default function ModelPage({ params }: { params: Promise<{ model: string 
               </div>
             </motion.div>
 
-            {/* Cores disponíveis */}
             <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.15 }}>
               <span className="text-[9px] tracking-[0.4em] uppercase font-bold block mb-8" style={{ color: "#c9a84c" }}>Cores Disponíveis</span>
               <div className="flex gap-4 mb-12">
@@ -126,8 +211,6 @@ export default function ModelPage({ params }: { params: Promise<{ model: string 
                   />
                 ))}
               </div>
-
-              {/* Preço destaque */}
               <div className="border-t pt-8" style={{ borderColor: "#e0e0e0" }}>
                 <p className="text-[9px] tracking-[0.4em] uppercase mb-2" style={{ color: "#999" }}>Preço Base</p>
                 <p className="font-display text-4xl italic" style={{ color: "#111111" }}>{car.price}</p>
