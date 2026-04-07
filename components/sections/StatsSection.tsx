@@ -17,18 +17,16 @@ export default function StatsSection() {
 
   return (
     <section className="relative py-40 overflow-hidden">
-      {/* Background — vídeo (adicione em /videos/stats-bg.mp4) */}
-      <div className="absolute inset-0 bg-[#080808]">
-        <video
-          className="w-full h-full object-cover opacity-40"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          src="/videos/stats-bg.mp4"
+      {/* Background */}
+      <div className="absolute inset-0">
+        <img
+          src="/images/painel-porsche.png"
+          alt=""
+          className="w-full h-full object-cover"
+          style={{ filter: "brightness(0.3)" }}
+          aria-hidden
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(8,8,8,0.4) 0%, rgba(8,8,8,0.2) 50%, rgba(8,8,8,0.6) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(8,8,8,0.5) 0%, rgba(8,8,8,0.2) 50%, rgba(8,8,8,0.6) 100%)" }} />
       </div>
 
       <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
