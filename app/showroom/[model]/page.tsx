@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useRef } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -9,7 +9,33 @@ import { getCarBySlug } from "@/lib/cars";
 const SPRING_K = 18;
 const DAMPING = 7;
 
-function VideoScrub({ slug, name }: { slug: string; name: string }) {
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isMobile;
+}
+
+function ScrubOverlay({ name }: { name: string }) {
+  return (
+    <>
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "linear-gradient(to bottom, rgba(6,6,6,0.3) 0%, transparent 20%, transparent 70%, rgba(6,6,6,0.8) 100%)"
+      }} />
+      <div className="absolute top-8 left-8 md:left-12 z-10">
+        <span className="text-[9px] tracking-[0.4em] uppercase font-bold" style={{ color: "rgba(201,168,76,0.7)" }}>
+          {name} · Arraste para explorar
+        </span>
+      </div>
+    </>
+  );
+}
+
+function DesktopVideoScrub({ slug, name }: { slug: string; name: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
@@ -70,24 +96,37 @@ function VideoScrub({ slug, name }: { slug: string; name: string }) {
           preload="auto"
           src={`/videos/${slug}-scrub.mp4`}
         />
-        <div className="absolute inset-0 pointer-events-none" style={{
-          background: "linear-gradient(to bottom, rgba(6,6,6,0.3) 0%, transparent 20%, transparent 70%, rgba(6,6,6,0.8) 100%)"
-        }} />
-
-        {/* Label */}
-        <div className="absolute top-8 left-8 md:left-12 z-10">
-          <span className="text-[9px] tracking-[0.4em] uppercase font-bold" style={{ color: "rgba(201,168,76,0.7)" }}>
-            {name} · Arraste para explorar
-          </span>
-        </div>
-
-        {/* Barra de progresso */}
+        <ScrubOverlay name={name} />
         <div className="absolute bottom-0 left-0 right-0 h-[2px] z-10" style={{ background: "rgba(201,168,76,0.1)" }}>
           <div ref={progressRef} className="h-full" style={{ width: "0%", background: "#c9a84c", transition: "none" }} />
         </div>
       </div>
     </div>
   );
+}
+
+function MobileVideoScrub({ slug, name, heroImage }: { slug: string; name: string; heroImage: string }) {
+  return (
+    <div className="relative h-screen bg-[#060606] overflow-hidden">
+      <img
+        src={heroImage}
+        alt={name}
+        className="absolute inset-0 w-full h-full object-cover opacity-80"
+      />
+      <ScrubOverlay name={name} />
+    </div>
+  );
+}
+
+function VideoScrub({ slug, name, heroImage }: { slug: string; name: string; heroImage: string }) {
+  const isMobile = useIsMobile();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return <div className="h-screen bg-[#060606]" />;
+  return isMobile
+    ? <MobileVideoScrub slug={slug} name={name} heroImage={heroImage} />
+    : <DesktopVideoScrub slug={slug} name={name} />;
 }
 
 function VideoPlaceholder({ slug, name }: { slug: string; name: string }) {
@@ -141,7 +180,7 @@ export default function ModelPage({ params }: { params: Promise<{ model: string 
 
       {/* Video Scrub ou Placeholder */}
       {hasVideo
-        ? <VideoScrub slug={car.slug} name={car.name} />
+        ? <VideoScrub slug={car.slug} name={car.name} heroImage={car.heroImage} />
         : <VideoPlaceholder slug={car.slug} name={car.name} />
       }
 
