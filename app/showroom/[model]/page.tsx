@@ -91,10 +91,12 @@ function DesktopVideoScrub({ slug, name }: { slug: string; name: string }) {
         <video
           ref={videoRef}
           className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
           muted
           playsInline
           preload="auto"
           src={`/videos/${slug}-scrub.mp4`}
+          onCanPlay={(e) => { (e.target as HTMLVideoElement).pause(); }}
         />
         <ScrubOverlay name={name} />
         <div className="absolute bottom-0 left-0 right-0 h-[2px] z-10" style={{ background: "rgba(201,168,76,0.1)" }}>
