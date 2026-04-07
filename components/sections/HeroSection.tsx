@@ -40,7 +40,7 @@ function HeroContent({ progressBarRef }: { progressBarRef?: React.RefObject<HTML
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] }}
           className="font-display italic font-normal mb-6 leading-[1.05]"
-          style={{ fontSize: "clamp(2.5rem, 8vw, 7.5rem)", letterSpacing: "-0.03em", color: "#111111" }}
+          style={{ fontSize: "clamp(2.5rem, 8vw, 7.5rem)", letterSpacing: "-0.03em", color: "#ffffff" }}
         >
           Não Existe
           <br />
@@ -52,7 +52,7 @@ function HeroContent({ progressBarRef }: { progressBarRef?: React.RefObject<HTML
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.7 }}
           className="text-sm md:text-base tracking-wide max-w-md mx-auto mb-10 leading-relaxed"
-          style={{ color: "#444444" }}
+          style={{ color: "rgba(255,255,255,0.75)" }}
         >
           Cada curva engenheirada. Cada momento amplificado. Cada volta, inesquecível.
         </motion.p>

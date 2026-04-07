@@ -68,10 +68,16 @@ export default function Navbar() {
           ))}
           <Link href="/configure/911-turbo-s">
             <motion.button
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.18)" }}
               whileTap={{ scale: 0.98 }}
-              className="px-6 py-2 text-black text-xs tracking-widest uppercase font-bold transition-colors"
-              style={{ background: "linear-gradient(135deg, #c9a84c 0%, #e8d5a3 50%, #c9a84c 100%)" }}
+              className="px-6 py-2 text-white text-xs tracking-widest uppercase font-bold rounded-full transition-all duration-300"
+              style={{
+                background: "rgba(255,255,255,0.08)",
+                backdropFilter: "blur(20px) saturate(180%)",
+                WebkitBackdropFilter: "blur(20px) saturate(180%)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                boxShadow: "0 2px 12px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.15)",
+              }}
             >
               Configurar
             </motion.button>
